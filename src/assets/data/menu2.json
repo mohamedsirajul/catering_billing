@@ -1,0 +1,128 @@
+{
+    "menu": [
+      {
+        "state": "orders",
+        "name": "Orders",
+        "type": "link",
+        "icon": "shopping_basket"
+      },
+  
+      {
+        "state": "menu",
+        "name": "Menu",
+        "type": "sub",
+        "icon": "local_dining",
+        "children": [
+          {
+            "state": "category",
+            "name": "Category",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "sub-category",
+            "name": "Sub Category",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "product",
+            "name": "Product",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "banner",
+            "name": "Banner",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "cat-banner",
+            "name": "Category Banner",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "home-section",
+            "name": "Home Section",
+            "icon": "local_dining",
+            "type": "link"
+          }
+          
+        ]
+      },
+      {
+        "state": "location",
+        "name": "Location",
+        "type": "sub",
+        "icon": "location_on",
+        "children": [
+          {
+            "state": "users",
+            "name": "Users",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "area",
+            "name": "Area",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "deliveryboy",
+            "name": "Delivery Boy",
+            "icon": "local_dining",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "state": "history",
+        "name": "History",
+        "type": "sub",
+        "icon": "style",
+        "children": [
+          {
+            "state": "completed",
+            "name": "Completed",
+            "icon": "style",
+            "type": "link"
+          },
+          {
+            "state": "cancelled",
+            "name": "Cancelled",
+            "icon": "style",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "state": "report",
+        "name": "Reports",
+        "type": "link",
+        "icon": "local_dining"
+      },
+      {
+        "state": "profile",
+        "name": "Profile Info",
+        "type": "sub",
+        "icon": "store",
+        "children": [
+          {
+            "state": "settings",
+            "name": "Settings",
+            "icon": "local_dining",
+            "type": "link"
+          },
+          {
+            "state": "overview",
+            "name": "Overview",
+            "icon": "local_dining",
+            "type": "link"
+          }
+        ]
+      }
+    ]
+  }

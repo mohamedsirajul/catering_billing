@@ -1,0 +1,213 @@
+  /* Toolbar */
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+ .button-size{
+  //padding: 8px 15px 8px 15px;
+   margin: 10px 20px 10px 20px ;
+   width:40%
+ }
+.krl-row {
+  margin-right: -8px;
+  margin-left: -8px;
+  box-sizing: border-box;
+}
+
+.krl-col {
+  padding-right: 8px;
+  padding-left: 8px;
+  box-sizing: border-box;
+}
+
+.krl-form-horizontal {
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+.example-chip-list {
+  width: 100%;
+}
+.form-element {
+  padding: 15px 15px 15px 15px;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.form-input{
+  margin-left: 15px;
+}
+.example-card {
+  max-width: 100%;
+  width: auto;
+} 
+.horizontal-mat-list-item {
+  float: right;
+  display: list-item;
+  }
+table {
+    width: 100%;
+  }
+
+.mat-table{
+    position:relative;
+    background-color: rgba(255, 255, 255, 0.959);
+    height :auto;
+    overflow: auto;   
+    width: flex ;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-cards {
+  .mat-card {
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}
+
+.mat-header-cell, .mat-cell {
+  min-width: 150px;
+}
+
+.table-container {
+  width: flex auto;
+  overflow-x: scroll;
+  // width: 86vw;
+}
+.example-form {
+min-width: 150px;
+max-width: 500px;
+width: 100%;
+}
+
+.example-container {
+display: flex;
+flex-direction: column;
+
+}
+
+.stats-cards {
+    .mat-card {
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+  .example-button-row {
+    
+    width: 50px;
+  }
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-card {
+  max-width: 100%;
+  width: auto;
+  margin: 8px !important;
+  padding: 8px !important;
+} 
+  
+  .krl-row {
+    margin-right: -8px;
+    margin-left: -8px;
+    box-sizing: border-box;
+  }
+  
+  .krl-col {
+    padding-right: 8px;
+    padding-left: 8px;
+    box-sizing: border-box;
+  }
+  
+  .krl-form-horizontal {
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .mat-form-field-wrapper
+  {
+    padding: 0px 0px 0px 0px !important;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .form-element {
+    padding: 15px 15px 15px 15px;
+    width: 100%;
+    box-sizing: border-box;
+  
+  }
+  
+  .example-button-row button,
+  .example-button-row a {
+  margin-right: 8px;
+  left: 1500px;
+  }
+
+  p {
+    font-family: Lato;
+  }
+
+  .chooseLabel{
+    margin: 25px;
+    padding: auto;
+  }
+
+  .category_image{
+   margin-left: 15px;
+   margin-top: 15px;
+  }
+
+  .submit-button{
+    margin: 15px;
+  }
+
+  .chip2{
+    background-color: #159c04;
+    color: #fff;
+  }
+  
+  .chip1{
+    background-color: #2a7cb3;
+    color: #fff;
+  }
+
+  .chip{
+    background-color: #ec4b2e;
+    color: #fff;
+  }
+
+  :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: #65000D;
+  }
+  

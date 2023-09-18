@@ -1,0 +1,56 @@
+<!-- <mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar> -->
+<!-- <div *ngIf="form_status" class="wrapper center">
+  <mat-progress-spinner class="inner" mode="indeterminate"></mat-progress-spinner>
+</div> -->
+<div fxLayout="column" class="krl-row">
+  <mat-card>
+    <div>
+      <mat-toolbar class="mattoolbar">
+        <mat-toolbar-row>
+          <span class="fill-remaining-space">Shop Details</span>
+          <span class="spacer"></span>
+          <h3> {{ shopstatus }} </h3>
+          <span class="spacer1"></span>
+          <button mat-raised-button color="primary" (click)="update_notes()">Update Notes</button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    <form [formGroup]="form1" class="krl-col">
+      <formly-form [model]="model1" [fields]="shop_details" [options]="options" [form]="form1">
+      </formly-form>
+    </form>
+  </mat-card>
+
+<mat-card>
+  <div>
+    <mat-toolbar class="mattoolbar">
+      <mat-toolbar-row>
+        <span class="fill-remaining-space">Bank Details</span>
+        <span class="spacer"></span>
+        <img *ngIf="bank_status" src="./assets/images/is_v.png" class="matero-branding-logo-expanded" matTooltip="Verified" alt="logo" />
+        <button *ngIf="!bank_status" mat-raised-button color="primary" (click)="update_bank()">Update Bank</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <form [formGroup]="form2" class="krl-col">
+    <formly-form [model]="model2" [fields]="fields2" [options]="options" [form]="form2">
+    </formly-form>
+  </form>
+</mat-card>
+
+<mat-card>
+  <div>
+    <mat-toolbar class="mattoolbar">
+      <mat-toolbar-row>
+        <span class="fill-remaining-space">Change Password</span>
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary" (click)="changePassword()">Update Password</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+  <form [formGroup]="form" >
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  </form>
+</mat-card>
+</div>

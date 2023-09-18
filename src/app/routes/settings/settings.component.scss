@@ -1,0 +1,16 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.krl-row {
+  margin: -8px;
+  box-sizing: border-box;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: #65000D;
+}

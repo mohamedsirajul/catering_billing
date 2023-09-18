@@ -1,0 +1,81 @@
+{
+  "menu": [
+    {
+      "state": "dashboard",
+      "name" : "Dashboard",
+      "type" : "link",
+      "icon" : "dashboard",
+      "roles": []
+    },
+    {
+      "state": "estimates",
+      "name" : "Estimates",
+      "type" : "link",
+      "icon" : "receipt",
+      "roles": []
+    },
+    {
+      "state": "customers",
+      "name" : "Customers",
+      "type" : "link",
+      "icon" : "group",
+      "roles": ["admin","manager"]
+    },
+    {
+      "state": "menu",
+      "name" : "Menu",
+      "type" : "sub",
+      "icon" : "local_dining",
+      "roles": ["admin","manager"],
+      "children": [
+        {
+          "state": "products",
+          "name" : "Products",
+          "icon" : "local_dining",
+          "type" : "link"
+        },
+        {
+          "state": "bulk-products",
+          "name" : "Bulk Products",
+          "icon" : "local_dining",
+          "type" : "link"
+        }
+      ]
+    },
+    {
+      "state": "insights",
+      "name" : "Insights",
+      "type" : "sub",
+      "icon" : "local_dining",
+      "roles": ["admin"],
+      "children": [
+        {
+          "state": "sales",
+          "name" : "Sales",
+          "icon" : "local_dining",
+          "type" : "link"
+        },
+        {
+          "state": "booking",
+          "name" : "Booking",
+          "icon" : "local_dining",
+          "type" : "link"
+        }
+      ]
+    },
+    {
+      "state": "bulk-booking",
+      "name" : "Bulk Booking",
+      "type" : "link",
+      "icon" : "collections_bookmark",
+      "roles": []
+    },
+    {
+      "state": "settings",
+      "name" : "Settings",
+      "type" : "link",
+      "icon" : "settings",
+      "roles": ["admin","manager"]
+    }
+  ]
+}

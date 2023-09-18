@@ -1,0 +1,119 @@
+/* Structure */
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stats-cards {
+    .mat-card {
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+
+  .mat-header-cell, .mat-cell {
+    min-width: 150px;
+}
+
+  .table-container {
+    width: flex auto;
+   
+    // width: 86vw;
+}
+  .example-full-width {
+  width: 100%;
+  }
+  
+  // .krl-row {
+  //   margin-right: -8px;
+  //   margin-left: -8px;
+  //   box-sizing: border-box;
+  // }
+  
+  .krl-col {
+    padding-right: 8px;
+    padding-left: 8px;
+    box-sizing: border-box;
+  }
+  
+  .krl-form-horizontal {
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .mat-table{
+    position:relative;
+    height :auto;
+    overflow: auto;   
+    width: flex ;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  .form-element {
+    padding: 15px 15px 15px 15px;
+    width: 100%;
+    box-sizing: border-box;
+  
+  }
+  
+  .example-button-row button,
+  .example-button-row a {
+  margin-right: 8px;
+  left: 1500px;
+  }
+  /* Toolbar */
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .example-card {
+    max-width: 100%;
+    width: auto;
+    margin: 10px 10px 10px 10px;
+  } 
+  
+  /* Filter */
+  .form {
+    min-height: 56px;
+    max-height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px 0;
+    font-size: 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-top: 10px;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  /* Mat table */
+  .no-results {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    font-size: 14px;
+    font-style: italic;
+  }
+  

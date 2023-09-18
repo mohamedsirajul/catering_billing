@@ -1,0 +1,53 @@
+<!-- dialog-box.component.html -->
+
+<h1 mat-dialog-title>
+  <strong>Delete</strong>
+</h1>
+<div mat-dialog-content>
+  <div
+    fxLayout="column"
+    class="krl-row"
+    [ngClass.xs]="'components-container-xs'"
+    fxLayoutGap="20px"
+  >
+    <div fxFlex class="krl-col" class="form-component-holder">
+      <div fxLayout="row" fxLayout="row wrap" flex="33">
+        <div *ngIf="action == 'c_Delete'">
+          Sure to delete <b>{{ local_data.catname }}</b
+          >?
+        </div>
+        <div *ngIf="action == 's_Delete'">
+          Sure to delete <b>{{ local_data.subcatname }}</b
+          >?
+        </div>
+        <div *ngIf="action == 'p_Delete'">
+          Sure to delete <b>{{ local_data.product_name }}</b
+          >?
+        </div>
+        <div *ngIf="action == 'b_Delete'">Sure to delete this<b> Banner</b>?</div>
+        <div *ngIf="action == 'n_Delete'">Sure to delete this<b> Notification</b>?</div>
+        <div *ngIf="action == 'h_Delete'">Sure to delete this<b> Home Section</b>?</div>
+      </div>
+      <!-- <div fxLayout="row" fxLayout="row wrap"  flex="33" >
+        <div >
+          <mat-form-field appearance="outline" class="form-element" *ngIf="action != 'Delete'; else elseTemplate">
+            <input placeholder="{{ action }}Product Name" matInput [(ngModel)]="local_data.product_name" />
+          </mat-form-field>
+        </div>
+      </div>  -->
+
+      <ng-template #elseTemplate>
+        <!-- Sure to delete <b>{{ local_data.catname }}</b>? -->
+        <!-- Sure to delete <b>{{ local_data.subcatname }}</b>?
+        Sure to delete <b>{{ local_data.product_name }}</b>? -->
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">Delete</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>

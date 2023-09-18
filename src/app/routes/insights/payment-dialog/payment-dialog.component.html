@@ -1,0 +1,93 @@
+<div class="mat-dialog-container">
+  <div>
+    <mat-card>
+      <mat-toolbar color="primary">{{ shop_name }}</mat-toolbar>
+      <!-- <P></P>        
+      <div class="line1"></div> -->
+      <!-- <mat-divider></mat-divider> -->
+      <table width="100%">
+        <tr>
+          <td>
+            <p>#{{ order_id }} (Deliver by {{ order_r_name }})</p>
+          </td>
+          <td align="right">{{ order_date }}</td>
+        </tr>
+        <tr>
+          <td>{{ order_name }} ({{ order_mobile }})</td>
+          <td align="right">{{ order_time }} - {{ order_d_time }}</td>
+        </tr>
+      </table>
+      <div class="line1"></div>
+      <table width="100%">
+        <tr>
+          <td>{{ order_address }}</td>
+        </tr>
+      </table>
+      <div class="line1"></div>
+      <table width="100%">
+          <tr>
+            <td>Cooking Instructions : {{ order_cooking }}</td>
+          </tr>
+        </table>
+
+      <div class="line1"></div>
+      <!-- <table><tr>
+          <td><mat-icon>shopping_cart</mat-icon></td>
+          <td><P class="div2">Don't send Cutlery tisuuses and straws</P></td>
+      </tr></table> -->
+      <table class="pros" width="100%" *ngFor="let p of order_products">
+        <tr>
+          <td class="icon"><img
+              class="product__content-icon"
+                src="{{p.image}}"
+              />
+          </td>
+          <td>{{ p.product }}</td>
+          <td align="right">{{ p.price }}</td>
+        </tr>
+      </table>
+
+      <div class="line1"></div>
+      <table style="width:100%">
+        <th></th>
+        <th></th>
+        <tr>
+          <td>Item Total ({{ prod_name.length }})</td>
+          <td align="right">₹ {{ order_item_total }}</td>
+        </tr>
+        <tr>
+          <td>
+            Delivery Charges
+          </td>
+          <td align="right">
+            {{ order_d_charge }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Taxes
+          </td>
+          <td align="right">
+            {{ order_tax_amount }}
+          </td>
+        </tr>
+        <tr>
+          <td class="disc">
+            Discount
+          </td>
+          <td align="right" class="disc">{{ order_couponcode }} - {{ order_discount }}</td>
+        </tr>
+      </table>
+
+      <div class="line1"></div>
+      <table style="width:100%">
+        <th></th>
+        <th></th>
+        <tr>
+          <td><h4>Total Bill</h4></td>
+          <td align="right"><h4>{{ order_total_amount }}</h4></td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Update Reason</h1>
+<div mat-dialog-content>
+  <p>What is reason for Update?</p>
+  <mat-form-field appearance="outline" class="form-element">
+    <textarea matInput [(ngModel)]="data.reason" autocomplete="off"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="data.reason" cdkFocusInitial>Save Reason</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

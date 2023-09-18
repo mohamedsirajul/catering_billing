@@ -1,0 +1,50 @@
+<mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar>
+<div class="login-page img-fluid" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="50px">
+  <div class="logo-container" fxFlexAlign="center">
+    <img class="img-size" src="assets/images/iconx.png" alt="logo" />
+  </div>
+  <mat-card fxFlexAlign="center" style="max-width: 380px;">
+      <mat-card-title class="text-center m-b-24">Sri Madhuram Catering</mat-card-title>
+      <mat-card-content>
+        <form class="matero-form-horizontal" [formGroup]="reactiveForm" (ngSubmit)="postdata(reactiveForm)">
+          <mat-form-field appearance="outline">
+            <mat-label>Email / Mobile No</mat-label>
+            <input matInput formControlName="username" autocomplete="off" required>
+            <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Mobile / Email</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password"
+                   formControlName="password" autocomplete="off" required>
+            <mat-error *ngIf="reactiveForm.get('password').invalid">Please enter Password</mat-error>
+          </mat-form-field> 
+  
+          <!-- <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-checkbox>Remember Me</mat-checkbox>
+            <a href="">Forgot Password?</a>
+          </div> -->
+  
+          <button class="w-full" mat-raised-button
+                  [disabled]="reactiveForm.invalid">Login</button>
+  
+          <!-- <div class="m-t-16">Don't have an account? <a routerLink="/auth/register">Click here to
+              create one</a></div> -->
+        </form>
+      </mat-card-content> 
+    </mat-card>
+</div>
+
+<footer class="aruvi-footer">
+  <div class="aruvi-cpyr">
+    <span>&#169;
+      <span>{{year}}</span>
+      IconX Technologies.All rights reserved.
+    </span>
+  </div>
+</footer>
+
+
+
+
+

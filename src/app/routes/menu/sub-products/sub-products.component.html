@@ -1,0 +1,535 @@
+<mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar>
+<div fxLayout="column" class="krl-row" [ngClass.xs]="'components-container-xs'" fxLayoutGap="20px">
+  <div fxFlex class="krl-col" class="form-component-holder">
+    <div *ngIf="report_status">
+      <mat-toolbar class="mattoolbar">
+        <mat-toolbar-row>
+          <span class="fill-remaining-space">Sub Products</span>
+          <span class="spacer"></span>
+          <button class="button" mat-raised-button color="primary" (click)="newProductEntry()">
+            Add Product
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <form *ngIf="true" [formGroup]="formGroup">
+        <mat-card class="example-card mat-elevation-z0">
+          <div class="example-container">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                (keyup)="applyFilter($event.target.value)"
+                placeholder="Search Products"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="example-container formGroup">
+            <mat-form-field appearance="outline">
+              <mat-label>Choose Filter Columns</mat-label>
+              <mat-select
+                [formControl]="toppingsControl"
+                (selectionChange)="valueChanged(toppingsControl)"
+                multiple
+              >
+                <mat-select-trigger>
+                  <mat-chip-list>
+                    <mat-chip
+                      color="primary"
+                      selected
+                      *ngFor="let i of toppingsControl.value"
+                      [removable]="true"
+                      (removed)="onToppingRemoved(i, toppingsControl)"
+                    >
+                      {{ i }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </mat-select-trigger>
+
+                <mat-option *ngFor="let topping of filteredColumns" [value]="topping">{{
+                  topping
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div
+            fxLayout="column"
+            class="krl-row"
+            [ngClass.xs]="'components-container-xs'"
+            fxLayoutGap="20px"
+          >
+            <div fxFlex class="krl-col">
+              <mat-card-content>
+                <div
+                  fxLayout="column"
+                  class="krl-form-horizontal"
+                  fxLayoutAlign="space-around stretch"
+                  style="background-color: white"
+                >
+                  <div fxLayout="row" fxLayout="row wrap" fxFlex="50" fxFlex.lt-sm="100">
+                    <div
+                      *ngFor="let j of toppingsControl.value; let i = index"
+                      class="example-container"
+                      fxFlex.xl="20"
+                      fxFlex.lg="25"
+                      fxFlex.md="33.33"
+                      fxFlex.sm="50"
+                      fxFlex.xs="100"
+                    >
+                      <div>
+                        <div>
+                          <mat-form-field appearance="outline" class="form-element">
+                            <mat-label>Choose {{ j }}</mat-label>
+                            <mat-select [formControl]="filterForm.get(j)" multiple>
+                              <mat-select-trigger>
+                                <mat-chip-list>
+                                  <mat-chip
+                                    color="primary"
+                                    selected
+                                    *ngFor="let k of filterForm.get(j).value"
+                                    [removable]="true"
+                                    (removed)="onToppingRemoved(k, filterForm.get(j))"
+                                  >
+                                    {{ k }}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                  </mat-chip>
+                                </mat-chip-list>
+                              </mat-select-trigger>
+
+                              <mat-option *ngFor="let x of f(j)" [value]="x">{{ x }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </div>
+          </div> -->
+        </mat-card>
+      </form>
+
+      <mat-card class="example-card mat-elevation-z0">
+        <div class="table-container">
+          <table
+            mat-table
+            class="table"
+            matSort
+            [dataSource]="dataSource"
+            #mytable
+            class="my-table mat-elevation-z8"
+          >
+            <!-- Id Column -->
+            <ng-container matColumnDef="s_no">
+              <th mat-header-cell *matHeaderCellDef>S.NO</th>
+              <td mat-cell *matCellDef="let element">{{ element.s_no }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element; let i = index" class="action-link">
+                <button mat-button (click)="editProduct(element)">
+                  <mat-icon matTooltip="Edit" color="primary">edit</mat-icon>
+                </button>
+
+                <button mat-button (click)="openDialog('p_Delete', element)">
+                  <mat-icon matTooltip="Delete" color="warn">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="product_name">
+              <th mat-header-cell *matHeaderCellDef>Product Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.product_name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="discattime">
+              <th mat-header-cell *matHeaderCellDef>Display Time</th>
+              <td mat-cell *matCellDef="let element">{{ element.discattime }}</td>
+            </ng-container>
+
+            <!-- toggle Column -->
+            <ng-container matColumnDef="toggle">
+              <th mat-header-cell *matHeaderCellDef>Publish</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-slide-toggle
+                  [checked]="element.activate"
+                  (change)="updateProductStatus(element)"
+                ></mat-slide-toggle>
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+
+            <!-- Image Column -->
+            <ng-container matColumnDef="product_image">
+              <th mat-header-cell *matHeaderCellDef>Product Image</th>
+              <td mat-cell *matCellDef="let element">
+                <img [src]="element.product_image" />
+              </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Product Quantity</th>
+              <td mat-cell *matCellDef="let element">{{ element.qty }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="product_price">
+              <th mat-header-cell *matHeaderCellDef>Product Price</th>
+              <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="discount">
+              <th mat-header-cell *matHeaderCellDef>Discount</th>
+              <td mat-cell *matCellDef="let element">{{ element.discount }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="catname">
+              <th mat-header-cell *matHeaderCellDef>Category Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.catname }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="subcatname">
+              <th mat-header-cell *matHeaderCellDef>Sub Category Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.subcatname }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef>Stock</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-slide-toggle
+                  [checked]="element.sactivate"
+                  (change)="updateStockStatus(element)"
+                ></mat-slide-toggle>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-card>
+
+      <mat-paginator class="mat-paginator-sticky"
+        [pageIndex]="0"
+        [pageSize]="20"
+        [pageSizeOptions]="[10, 20, 50, 100, 500]"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<mat-card *ngIf="edit_status" class="example-card">
+  <form [formGroup]="myForm">
+    <div>
+      <mat-toolbar class="mattoolbar">
+        <mat-toolbar-row>
+          <span class="fill-remaining-space">Product Details</span>
+          <span class="spacer"></span>
+
+          <button class="button" mat-raised-button color="primary" (click)="displayReport()">
+            All Products
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+
+    <div fxLayout="row" fxLayout="row wrap">
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label for="product_name">Product Name</mat-label>
+          <input matInput formControlName="product_name" name="product_name" class="form-text" />
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <div>
+          <mat-label class="form-element">Product Image</mat-label>
+          <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Open Menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu2="matMenu">
+            <button mat-menu-item (click)="deleteImg()">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+        <input
+          class="form-input"
+          id="file"
+          accept=".jpg,.jpeg,.png"
+          type="file"
+          formControlName="file"
+          (change)="onFileChange($event)"
+        />
+        <img
+          class="product_image"
+          [src]="imageSrc"
+          *ngIf="imageSrc"
+          style="height: 50px; width:50px"
+        />
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label for="category_name">Category Name</mat-label>
+          <input
+            type="text"
+            placeholder="Type & Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+            (input)="onTextChange($event.target.value)"
+          />
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectionChanged($event.option.value)"
+          >
+            <mat-option *ngFor="let i of filteredOptions | async" [value]="i">
+              {{ i }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label for="sub_category_name">Sub Category Name</mat-label>
+          <input
+            type="text"
+            placeholder="Type & Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="myControl1"
+            [matAutocomplete]="auto1"
+            (input)="onTextChange1($event.target.value)"
+          />
+          <mat-autocomplete
+            #auto1="matAutocomplete"
+            (optionSelected)="onsubSelectionChanged($event.option.value)"
+          >
+            <mat-option *ngFor="let i of subfilteredOptions | async" [value]="i">
+              {{ i }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field class="form-element" appearance="outline">
+          <mat-label class="form-label">Out of Stock</mat-label>
+          <mat-select class="form-text" formControlName="out_of_stock">
+            <mat-option *ngFor="let i of stock" [value]="i">{{ i }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field class="form-element" appearance="outline">
+          <mat-label class="form-label">Product Type</mat-label>
+          <mat-select class="form-text" formControlName="product_type">
+            <mat-option *ngFor="let i of productType" [value]="i">{{ i }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field class="form-element" appearance="outline">
+          <mat-label class="form-label">Make Product Popular</mat-label>
+          <mat-select class="form-text" formControlName="product_popular">
+            <mat-option *ngFor="let i of product_popular" [value]="i">{{ i }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label"> Product Quantity </mat-label>
+          <mat-chip-list #chipList>
+            <mat-chip
+              class="primary"
+              *ngFor="let i of field_values"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(i)"
+            >
+              {{ i }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Type 100Gms, 1Kg"
+              #fieldInput
+              [formControl]="productCtrl"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <!-- <mat-autocomplete
+            #auto2="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option *ngFor="let i of filteredValues | async" [value]="i">
+              {{ i }}
+            </mat-option>
+          </mat-autocomplete> -->
+        </mat-form-field>
+      </div>
+
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label">Product Price</mat-label>
+          <mat-chip-list #chipList1>
+            <mat-chip
+              class="primary"
+              *ngFor="let i of price_values"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove1(i)"
+            >
+              {{ i }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Type Product Price"
+              #fieldInput
+              [formControl]="fieldCtrl"
+              [matChipInputFor]="chipList1"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add1($event)"
+            />
+          </mat-chip-list>
+          <!-- <mat-autocomplete
+            #auto2="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option *ngFor="let i of filteredValues | async" [value]="i">
+              {{ i }}
+            </mat-option>
+          </mat-autocomplete> -->
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label">Product Discount</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            onkeydown="javascript: return event.keyCode <= 9 && event.keyCode >= 8 ||
+            event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+            onkeypress="return event.charCode >= 48"
+            class="form-text"
+            type="text"
+            [min]="0"
+            [max]="100"
+            pattern="\d*"
+            maxlength="2"
+            formControlName="product_discount"
+          />
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label">Product Description</mat-label>
+          <textarea matInput class="form-text" formControlName="product_description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="example-container" fxFlex.xl="20" fxFlex.lg="25" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-form-field class="form-element" appearance="outline">
+          <mat-label class="form-label">Category Timing</mat-label>
+          <mat-select
+            class="form-text"
+            formControlName="cattiming"
+            (ngModelChange)="onTimeSelection($event)"
+          >
+            <mat-option *ngFor="let i of catTiming" [value]="i">{{ i }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="isDisabled"
+        class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100"
+      >
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label for="catname">Start Time</mat-label>
+          <input
+            matInput
+            type="time"
+            formControlName="catstarttime"
+            name="catstarttime"
+            class="form-text"
+          />
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="isDisabled"
+        class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100"
+      >
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label for="catname">End Time</mat-label>
+          <input
+            matInput
+            type="time"
+            formControlName="catstoptime"
+            name="catstoptime"
+            class="form-text"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+      <button
+        class="submit-button"
+        *ngIf="submit_status"
+        mat-raised-button
+        color="primary"
+        (click)="sendtoServer('add')"
+      >
+        Submit
+      </button>
+      <button
+        class="update-button"
+        *ngIf="update_status"
+        mat-raised-button
+        color="primary"
+        (click)="sendtoServer('edit')"
+      >
+        Update
+      </button>
+      <!-- <button
+      class="submit-button"
+      *ngIf="submit_status"
+      mat-raised-button
+      color="primary"
+      (click)="Report()"
+    >
+      Cancel
+    </button>
+      <button
+      class="update-button"
+      *ngIf="update_status"
+      mat-raised-button
+      color="primary"
+      (click)="Report()"
+    >
+      Cancel
+    </button> -->
+    </div>
+  </form>
+</mat-card>

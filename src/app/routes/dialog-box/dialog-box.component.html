@@ -1,0 +1,112 @@
+<!-- dialog-box.component.html -->
+<mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title><strong>{{action}} Products</strong></h1>
+<form [formGroup]="myForm" *ngIf="action != 'Delete'; else elseTemplate">
+<div mat-dialog-content fxLayout="row" fxLayout="row wrap">
+  <!-- <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+  <mat-form-field appearance="outline" class="form-element" *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  </div> -->
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-form-field appearance="outline" class="form-element">
+      <mat-label for="category_name">Product Name</mat-label>
+      <input tab-directive
+        type="text"
+        placeholder="Type Product Name"
+        aria-label="Number"
+        matInput
+        [formControl]="productControl"
+        [matAutocomplete]="auto"
+        (input)="onTextChange($event.target.value)"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="onSelectionChanged($event.option.value)"
+      >
+        <mat-option *ngFor="let i of filteredOptions | async" [value]="i">
+          {{ i }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-form-field appearance="outline" class="form-element">
+      <mat-label class="form-label">Product Price</mat-label>
+      <input
+        matInput tab-directive
+        autocomplete="off"
+        class="form-text"
+        type="number"
+        formControlName="product_price"
+      />
+    </mat-form-field>
+  </div>
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-form-field appearance="outline">
+      <mat-label class="form-label">Product GST</mat-label>
+      <mat-select tab-directive class="form-text" formControlName="product_gst">
+        <mat-option *ngFor="let i of gst_list" [value]="i.value">{{ i.view_value }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-form-field appearance="outline" class="form-element" cdkDropList [cdkDropListData]="chips" (cdkDropListDropped)="drop($event)">
+      <mat-label class="form-label"> Sub Products </mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip
+          class="primary"
+          *ngFor="let i of field_values"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(i)" cdkDrag
+        >
+          {{ i }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input tab-directive
+          placeholder="Type Sambar, Rasam.."
+          #fieldInput
+          [formControl]="subProductCtrl"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-form-field appearance="outline" class="form-element">
+      <mat-label class="form-label">Product Quantity</mat-label>
+      <input  
+      matInput tab-directive
+      autocomplete="off"
+      class="form-text"
+      type="number"
+        formControlName="product_quantity"
+      />
+    </mat-form-field>
+  </div>
+  <div class="example-container col-sm-12" fxFlex.xl="25" fxFlex.lg="33.33" fxFlex.sm="50" fxFlex.xs="100">
+  <mat-form-field appearance="outline" class="text-input">
+    <mat-label for="product_time">Product Time</mat-label>
+    <input tab-directive
+      matInput
+      formControlName="product_time"
+      autocomplete="off"
+      name="product_time"
+      class="form-text"
+    />
+  </mat-form-field>
+</div>
+
+</div>
+</form>
+<ng-template #elseTemplate>
+  Sure to delete <b>{{local_data.p_name}}</b>?
+</ng-template>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()" mat-flat-button color="primary">{{action}}</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</div>

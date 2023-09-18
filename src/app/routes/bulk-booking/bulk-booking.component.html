@@ -1,0 +1,134 @@
+<!-- <mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar> -->
+<!-- <div *ngIf="form_status" class="wrapper center">
+  <mat-progress-spinner class="inner" mode="indeterminate"></mat-progress-spinner>
+</div> -->
+<!-- <mat-spinner color="primary" diameter="50"></mat-spinner> -->
+<div fxLayout="column" class="krl-row">
+  <div fxFlex class="krl-col" class="form-component-holder">
+    <div *ngIf="report_status">
+      <div>
+        <mat-toolbar class="mattoolbar">
+          <mat-toolbar-row>
+            <span class="fill-remaining-space">Bulk Booking</span>
+            <span class="spacer"></span>
+            <button class="button" mat-raised-button color="primary" (click)="newnotiEntry()">
+              New Bulk Booking
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+      <mat-card class="example-card mat-elevation-z0">
+        <div class="example-container">
+          <mat-form-field appearance="outline" >
+            <input class="remove_padding"
+              matInput
+              (keyup)="applyFilter($event.target.value)"
+              placeholder="Search Bulk Booking"
+            />
+          </mat-form-field>
+        </div>
+      </mat-card>
+      <mat-card class="example-card mat-elevation-z0">
+        <div class="table-container ">
+          <table
+            mat-table
+            class="table"
+            matSort
+            [dataSource]="dataSource"
+            #mytable
+            class="my-table mat-elevation-z8"
+          >
+            <ng-container matColumnDef="s_no">
+              <th mat-header-cell *matHeaderCellDef>S.NO</th>
+              <td mat-cell *matCellDef="let element">{{ element.s_no }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="booking_no">
+              <th mat-header-cell *matHeaderCellDef>Booking No</th>
+              <td mat-cell *matCellDef="let element">{{ element.booking_no }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="booking_date">
+              <th mat-header-cell *matHeaderCellDef>Booking Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.booking_date }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cus_name">
+              <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.cus_name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="delivery_date">
+              <th mat-header-cell *matHeaderCellDef>Delivery Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.delivery_date }}</td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element; let i = index" class="action-link">
+                <button mat-button (click)="editBanner(element)">
+                  <mat-icon matTooltip="Send" color="primary">Send</mat-icon>
+                </button>
+
+                <button mat-button (click)="openDialog('b_Delete', element)">
+                  <mat-icon matTooltip="Delete" color="warn">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element; let i = index" class="action-link">
+                <!-- <button
+                  class="update-button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="editnotification(element)"
+                >
+                Resend
+                </button> -->
+                <button mat-button (click)="viewEstimate(element,'view')">
+                  <mat-icon matTooltip="View" color="accent">remove_red_eye</mat-icon>
+                </button>
+                <button *ngIf="element.view_status" mat-button>
+                  <mat-chip-list>
+                    <mat-chip class ="chip2">Estimated</mat-chip>
+                  </mat-chip-list>
+                </button>
+                <button *ngIf="!element.view_status" mat-button (click)="editEstimate(element)">
+                  <mat-icon matTooltip="Edit" color="primary">edit</mat-icon>
+                </button>
+                <button *ngIf="!element.view_status" mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Open Menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                
+                <mat-menu #menu2="matMenu">
+                  <button mat-menu-item (click)="addPrice(element)">
+                    <mat-icon color="accent">event_available</mat-icon>
+                    <span>Add Price</span>
+                  </button>
+                  <button mat-menu-item (click)='deleteEstimate(element)'>
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-card>
+      <mat-paginator
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[2, 5, 10, 25, 100]"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<!-- <mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar> -->
+<!-- <breadcrumb></breadcrumb> -->
+<div fxLayout="column" class="krl-row" fxLayoutGap="20px">
+  <div fxFlex class="krl-col" class="form-component-holder">
+    <div>
+      <mat-toolbar class="accentcolor">
+        <mat-toolbar-row>
+          <span class="fill-remaining-space">{{ fulltablename }}</span>
+          <span class="spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Open Menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu2="matMenu">
+            <button mat-menu-item (click)="exportpdf()">
+              <mat-icon>picture_as_pdf</mat-icon>
+              <span>Export PDF</span>
+            </button>
+            <button mat-menu-item (click)="exportcsv()">
+              <mat-icon>library_books</mat-icon>
+              <span>Export CSV</span>
+            </button>
+          </mat-menu>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    <mat-card >
+      <div div fxLayout="row" fxLayout="row wrap">
+        <div class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label">Type</mat-label>
+          <mat-select class="form-text" [(ngModel)]="selectedValue"
+          name="sale" (selectionChange)="getSelectValue()">
+          <mat-option *ngFor="let sale of types" [value]="sale.value">
+            {{ sale.viewValue }}
+          </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100">
+        <mat-form-field appearance="outline" class="form-element">
+          <mat-label class="form-label">Choose Product</mat-label>
+          <mat-select class="form-text" [(ngModel)]="productValue"
+          name="sale" (selectionChange)="getSelectProductValue()">
+          <mat-option *ngFor="let sale of all_products" [value]="sale.id">
+            {{ sale.p_name }}
+          </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100">
+          <mat-form-field appearance="outline" class="form-element">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="start" (dateInput)="StartDateEvent($event)" />
+            <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+            <mat-datepicker #start></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="example-container"
+        fxFlex.xl="20"
+        fxFlex.lg="25"
+        fxFlex.sm="50"
+        fxFlex.xs="100">
+          <mat-form-field appearance="outline" class="form-element">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="end" (dateInput)="EndDateEvent($event)" />
+            <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+            <mat-datepicker #end></mat-datepicker>
+          </mat-form-field>
+        </div>
+       
+        <div fxLayout fxLayoutAlign="space-between center">
+          <button class="button" mat-raised-button color="primary" (click)="getResults()">
+            Get Results
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card>
+      <div class="table-container ">
+        <table
+          mat-table
+          class="table"
+          matSort
+          [dataSource]="dataSource"
+          #mytable
+          class="my-table mat-elevation-z8"
+        >
+          <ng-container matColumnDef="s_no">
+            <th mat-header-cell *matHeaderCellDef>S.NO</th>
+            <td mat-cell *matCellDef="let element">{{ element.s_no }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="booking_no">
+            <th mat-header-cell *matHeaderCellDef>Booking No</th>
+            <td mat-cell *matCellDef="let element" >{{ element.booking_no }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="booking_date">
+            <th mat-header-cell *matHeaderCellDef>Booking Date</th>
+            <td mat-cell *matCellDef="let element" >{{ element.booking_date }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cus_name">
+            <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+            <td mat-cell *matCellDef="let element" >{{ element.cus_name }}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="product_name">
+            <th mat-header-cell *matHeaderCellDef>Product Name</th>
+            <td mat-cell *matCellDef="let element" >{{ element.product_name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="product_qty">
+            <th mat-header-cell *matHeaderCellDef>Qty</th>
+            <td mat-cell *matCellDef="let element" >{{ element.product_qty }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="delivery_date">
+            <th mat-header-cell *matHeaderCellDef>Delivery Date</th>
+            <td mat-cell *matCellDef="let element" > {{ element.delivery_date }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let element" >₹ {{ element.total }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[2, 5, 10, 25, 100]"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </mat-card>
+  </div>
+</div>

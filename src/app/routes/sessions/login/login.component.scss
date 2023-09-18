@@ -1,0 +1,88 @@
+.img-fluid {
+  background-size: 100% auto;
+  background-image:url("../../../../assets/images/back.jpg");
+}
+
+button{
+  background-color: rgb(114,50,242);
+  color: #fff;
+}
+
+button:hover{
+  background-color: rgb(44, 92, 224);
+}
+
+// Footer Starts
+
+.aruvi-footer{
+  color: #000;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(235, 201, 201, 0.72);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+
+}
+
+.aruvi-cpyr{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 14px;
+}
+.aruvi-cpyr>span{
+  padding: 3px;
+}
+
+@media only screen and (max-width:453px){
+  .aruvi-cpyr{
+   
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction:normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (orientation:landscape) and (max-width:730){
+
+  .aruvi-cpyr{
+   
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;}
+  
+}
+.img-size{
+  height: 210px;
+  width: 295px;
+}
+
+.login-page {
+  height: 100%;
+  width: 100%;
+}
+
+.logo-container {
+  height: auto;
+  width: 250px;
+}
+
+.login-field {
+  width: 100%;
+}

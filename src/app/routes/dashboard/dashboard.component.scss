@@ -1,0 +1,34 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+  .spacer1 {
+    flex: 0.1 1 auto;
+  }
+
+  .remove_margin{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
+  .mat-raised-button {
+    margin-right: 8px;
+    margin-top: 8px;
+  }
+
+  .remargin{
+    margin-bottom: 0px !important;
+  }
+
+  .repadding{
+    padding-top: 8px !important;
+  }
+
+  .fill {
+    flex: 1;
+  }
+
+  :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: #65000D;
+  }
+  

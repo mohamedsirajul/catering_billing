@@ -1,0 +1,32 @@
+<!-- dialog-box.component.html -->
+<mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title><strong>{{action}} Vessel</strong></h1>
+<form [formGroup]="myForm" *ngIf="action != 'Delete'; else elseTemplate">
+  <div mat-dialog-content fxLayout="row" fxLayout="row wrap">
+    <div
+    class="example-container col-sm-12"
+    fxFlex.xl="20"
+    fxFlex.lg="25"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+  >
+    <mat-form-field appearance="outline" class="form-element">
+      <mat-label for="vessel_name">Vessel Name</mat-label>
+      <input
+        matInput
+        formControlName="vessel_name"
+        autocomplete="off"
+        name="vessel_name"
+        class="form-text"
+      />
+    </mat-form-field>
+  </div>
+</div>
+</form>
+<ng-template #elseTemplate>
+  Sure to delete <b>{{local_data.p_name}}</b>?
+</ng-template>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()" mat-flat-button color="primary">{{action}}</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</div>

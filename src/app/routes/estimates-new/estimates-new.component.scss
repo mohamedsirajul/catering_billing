@@ -1,0 +1,311 @@
+.spacer {
+  flex: 5 1 auto;
+}
+
+.spacer1 {
+  flex: 0.1 1 auto;
+}
+
+.remove_margin{
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.mat-raised-button {
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+.remargin{
+  margin-bottom: 0px !important;
+}
+
+.repadding{
+  padding-top: 8px !important;
+}
+
+  ::ng-deep .mat-form-field-wrapper{
+    padding-bottom: 0px;
+ }
+
+ .form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.text-input {
+  flex-basis: calc(33.33% - 10px);
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mat-form-field {
+    flex-basis: calc(50% - 10px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .mat-form-field {
+    flex-basis: 100%;
+  }
+}
+
+.text-area {
+  flex-basis: 100%;
+  margin-bottom: 20px;
+}
+
+  /* Toolbar */
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+ .button-size{
+  //padding: 8px 15px 8px 15px;
+   margin: 10px 20px 10px 20px ;
+   width:40%
+ }
+.krl-row {
+  margin-right: -8px;
+  margin-left: -8px;
+  box-sizing: border-box;
+}
+
+.krl-col {
+  padding-right: 8px;
+  padding-left: 8px;
+  box-sizing: border-box;
+}
+
+.krl-form-horizontal {
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+.example-chip-list {
+  width: 100%;
+}
+.form-element {
+  padding: 15px 15px 15px 15px;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.form-input{
+  margin-left: 15px;
+}
+.example-card {
+  max-width: 100%;
+  width: auto;
+} 
+.horizontal-mat-list-item {
+  float: right;
+  display: list-item;
+  }
+table {
+    width: 100%;
+  }
+
+.mat-table{
+    position:relative;
+    background-color: rgba(255, 255, 255, 0.959);
+    height :auto;
+    overflow: auto;   
+    width: flex ;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-cards {
+  .mat-card {
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}
+
+.mat-header-cell, .mat-cell {
+  min-width: 150px;
+}
+
+.table-container {
+  width: flex auto;
+  overflow-x: scroll;
+  // width: 86vw;
+}
+.example-form {
+min-width: 150px;
+max-width: 500px;
+width: 100%;
+}
+
+.example-container {
+display: flex;
+flex-direction: column;
+
+}
+
+.stats-cards {
+    .mat-card {
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+  .example-button-row {
+    
+    width: 50px;
+  }
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-card {
+  max-width: 100%;
+  width: auto;
+  margin: 8px !important;
+  padding: 8px !important;
+} 
+  
+  .krl-row {
+    margin-right: -8px;
+    margin-left: -8px;
+    box-sizing: border-box;
+  }
+  
+  .krl-col {
+    padding-right: 8px;
+    padding-left: 8px;
+    box-sizing: border-box;
+  }
+  
+  .krl-form-horizontal {
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .mat-form-field-wrapper
+  {
+    padding: 0px 0px 0px 0px !important;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .example-button-row button,
+  .example-button-row a {
+  margin-right: 8px;
+  left: 1500px;
+  }
+
+  p {
+    font-family: Lato;
+  }
+
+  .chooseLabel{
+    margin: 25px;
+    padding: auto;
+  }
+
+  .category_image{
+   margin-left: 15px;
+   margin-top: 15px;
+  }
+
+  .submit-button{
+    margin: 15px;
+  }
+
+  .element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  tr.expanded-row {
+    height: 0;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+  }
+  
+  .my-card {
+    width: 300px;
+    float: right;
+    margin-right: 15px;
+  }
+
+  .my-card1 {
+    width: 220px;
+    float: right;
+    margin-right: 15px;
+  }
+
+  .my-left-card {
+    width: auto;
+    float: right;
+    margin-right: 15px;
+  }
+
+  .my-center-card {
+    width: auto;
+    float: left;
+    margin-right: 15px;
+  }
+
+
+  .my-div {
+    padding: 5px;
+  }
+
+
+  .card-container-right{
+    display: inline;
+    float: right;
+    padding: 0px;
+  }
+  
+  .card-container-left{
+    display: inline;
+    padding: 5px;
+  }
+
+//   ::ng-deep .mat-card-content .mat-card-actions, .mat-card-subtitle{
+//     margin-bottom: 0px;
+//  }
+
+ .my-footer{
+  position: fixed;
+  bottom:0;
+  width:auto;
+  background-color: rgb(250, 250, 250);
+}
+
+.back_clr {
+  background-color: rgb(204, 222, 250);
+//     align-self: stretch; // so the cell take all the height
+//     line-height: 48px; // for vertical align of content if you are with the default cell height
+}

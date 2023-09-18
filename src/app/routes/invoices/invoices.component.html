@@ -1,0 +1,263 @@
+<!-- <mat-progress-bar *ngIf="form_status" mode="indeterminate"></mat-progress-bar> -->
+<!-- <div *ngIf="form_status" class="wrapper center">
+  <mat-progress-spinner class="inner" mode="indeterminate"></mat-progress-spinner>
+</div> -->
+<div fxLayout="column" class="krl-row">
+  <div fxFlex class="krl-col" class="form-component-holder">
+    <div *ngIf="report_status">
+      <div>
+        <mat-toolbar class="mattoolbar">
+          <mat-toolbar-row>
+            <span class="fill-remaining-space">Invoices</span>
+            <span class="spacer"></span>
+            <!-- <button class="button" mat-raised-button color="primary" (click)="newnotiEntry()">
+              New Invoice
+            </button> -->
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+      <mat-card class="example-card mat-elevation-z0">
+        <div class="example-container">
+          <mat-form-field appearance="outline" >
+            <input class="remove_padding"
+              matInput
+              (keyup)="applyFilter($event.target.value)"
+              placeholder="Search Invoices"
+            />
+          </mat-form-field>
+        </div>
+      </mat-card>
+      <mat-card class="example-card mat-elevation-z0">
+        <div class="table-container ">
+          <table
+            mat-table
+            class="table"
+            matSort
+            [dataSource]="dataSource"
+            #mytable
+            class="my-table mat-elevation-z8"
+          >
+            <ng-container matColumnDef="s_no">
+              <th mat-header-cell *matHeaderCellDef>S.NO</th>
+              <td mat-cell *matCellDef="let element">{{ element.s_no }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="invoice_date">
+              <th mat-header-cell *matHeaderCellDef>Invoice Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.invoice_date }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="invoice_no">
+              <th mat-header-cell *matHeaderCellDef>Invoice No</th>
+              <td mat-cell *matCellDef="let element" [style]="element.bulk == '1' ? 'color :rgb(63,81,255); cursor: pointer;' : ''" (click)="invoiceClicked(element.order_id,element.bulk)">{{ element.invoice_no }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cus_name">
+              <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.cus_name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef>Total Amount</th>
+              <td mat-cell *matCellDef="let element">
+                ₹ {{ element.total }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="paid_status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list>
+                  <mat-chip [class]="element.is_paid == '0' ? 'chip' : element.is_paid == '1' ? 'chip1' : 'chip2'">{{ element.paid_status }}</mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_by">
+              <th mat-header-cell *matHeaderCellDef>Created By</th>
+              <td mat-cell *matCellDef="let element">{{ element.created_by }}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="delivery_date">
+              <th mat-header-cell *matHeaderCellDef>Delivery Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.delivery_date }}</td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element; let i = index" class="action-link">
+                <button mat-button (click)="editBanner(element)">
+                  <mat-icon matTooltip="Send" color="primary">Send</mat-icon>
+                </button>
+
+                <button mat-button (click)="openDialog('b_Delete', element)">
+                  <mat-icon matTooltip="Delete" color="warn">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element; let i = index" class="action-link">
+                <!-- <button
+                  class="update-button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="editnotification(element)"
+                >
+                Resend
+                </button> -->
+
+                <button mat-button (click)="viewInvoice(element,'view')">
+                  <mat-icon matTooltip="View" color="accent">remove_red_eye</mat-icon>
+                </button>
+                <button mat-button (click)="editInvoice(element)">
+                  <mat-icon matTooltip="Edit" color="primary">edit</mat-icon>
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Open Menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+          
+                <mat-menu #menu2="matMenu">
+                  <button *ngIf="element.paidstatus" mat-menu-item (click)="paidInvoice('Add',element)">
+                    <mat-icon color="accent">event_available</mat-icon>
+                    <span>Add Payment</span>
+                  </button>
+                  <!-- <button *ngIf="element.paidstatus" mat-menu-item (click)="paidInvoice(element,1)">
+                    <mat-icon color="accent">event_busy</mat-icon>
+                    <span>Mark as Fully Paid</span>
+                  </button> -->
+                  <button mat-menu-item (click)="viewInvoice(element,'download')">
+                    <mat-icon color="accent">picture_as_pdf</mat-icon>
+                    <span>Download</span>
+                  </button>
+                  <button mat-menu-item (click)="viewInvoice(element,'print')">
+                    <mat-icon color="accent">print</mat-icon>
+                    <span>Print</span>
+                  </button>
+                  <button mat-menu-item (click)='deleteInvoice(element)'>
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-card>
+      <mat-paginator
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[2, 5, 10, 25, 100]"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
+
+    <mat-card *ngIf="edit_status" class="example-card">
+      <div>
+        <mat-toolbar class="mattoolbar">
+          <mat-toolbar-row>
+            <span class="fill-remaining-space">Send Notification</span>
+            <span class="spacer"></span>
+
+            <button class="button" mat-raised-button color="primary" (click)="displayNotification()">
+              Notification List
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+      <form [formGroup]="myForm">
+        <div fxLayout="row" fxLayout="row wrap">
+          <div
+            class="example-container"
+            fxFlex.xl="20"
+            fxFlex.lg="25"
+            fxFlex.sm="50"
+            fxFlex.xs="100"
+          >
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label for="catname">Notification Title</mat-label>
+              <input
+                matInput
+                formControlName="title"
+                autocomplete="off"
+                name="title"
+                class="form-text"
+              />
+            </mat-form-field>
+          </div>
+          <div
+            class="example-container"
+            fxFlex.xl="20"
+            fxFlex.lg="25"
+            fxFlex.sm="50"
+            fxFlex.xs="100"
+          >
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label for="catname">Notification Message</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                formControlName="message"
+                name="message"
+                class="form-text"
+              />
+            </mat-form-field>
+          </div>
+          <div
+            class="example-container"
+            fxFlex.xl="20"
+            fxFlex.lg="25"
+            fxFlex.sm="50"
+            fxFlex.xs="100"
+          >
+            <div>
+              <mat-label class="form-element">Notification Image</mat-label>
+              <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Open Menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu2="matMenu">
+                <button mat-menu-item (click)="deleteImg()">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </div>
+            <div>
+              <img
+                class="image form-input"
+                [src]="imageSrc"
+                *ngIf="imageSrc"
+                style="height: 100px; width:100px"
+              />
+              <input
+                class="form-input"
+                id="file"
+                accept=".jpg,.jpeg,.png"
+                type="file"
+                formControlName="file"
+                (change)="onFileChange($event)"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            class="submit-button"
+            *ngIf="submit_status"
+            mat-raised-button
+            color="primary"
+            (click)="sendtoServer('add')"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
